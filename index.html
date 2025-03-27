@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>IT Project Tracker</title>
+</head>
+
+<body>
+    <h1>IT Project Tracker</h1>
+
+    <!-- Form to enter project details -->
+    <div>
+        <label for="project_title">Project Title:</label>
+        <input type="text" id="project_title" />
+    </div>
+
+    <div>
+        <label for="project_status">Project Status:</label>
+        <select id="project_status">
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+            <option value="On Hold">On Hold</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="estimated_hours">Estimated Hours:</label>
+        <input type="number" id="estimated_hours" />
+    </div>
+
+    <button py-click="process_project()" id="submit_button">Submit Project</button>
+
+    <div id="result_area"></div>
+
+    <!-- Load PyScript to run tracker.py -->
+    <py-script src="./tracker.py"></py-script>
+</body>
+
+</html>
