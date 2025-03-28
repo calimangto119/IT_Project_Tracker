@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>List Projects</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    a {
+      text-decoration: none;
+      color: #007bff;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>List of Projects</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Status</th>
+          <th>Owner</th>
+          <th>Start Date</th>
+          <th>Target Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if projects %}
+        {% for project in projects %}
+        <tr>
+          <td>{{ project[0] }}</td>
+          <td>{{ project[1] }}</td>
+          <td>{{ project[2] }}</td>
+          <td>{{ project[9] }}</td>
+          <td>{{ project[10] }}</td>
+          <td>{{ project[11] }}</td>
+          <td>
+            <a href="/update_project/{{ project[0] }}" class="btn">Edit</a>
+          </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+          <td colspan="7" style="text-align: center;">No projects found.</td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+
+    <a href="/" class="btn">Back to Home</a>
+  </div>
+</body>
+</html>
