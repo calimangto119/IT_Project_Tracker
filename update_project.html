@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 40px;
+        }
+        h2 {
+            color: #0077AA;
+            text-align: center;
+        }
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-width: 700px;
+            margin: auto;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        input, select, textarea, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #0077AA;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005f8c;
+        }
+        .back-btn {
+            background-color: #ccc;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Update Existing Project</h2>
+    <form method="POST" action="https://10.123.30.40:5000/update_project">
+        <label for="project_id">Project ID:</label>
+        <input type="number" name="project_id" required>
+
+        <label for="title">Updated Title:</label>
+        <input type="text" name="title">
+
+        <label for="status">Status:</label>
+        <select name="status">
+            <option value="In Process">In Process</option>
+            <option value="Completed">Completed</option>
+            <option value="On Hold">On Hold</option>
+        </select>
+
+        <label for="activity_type">Activity Type:</label>
+        <select name="activity_type">
+            <option>Infrastructure</option>
+            <option>Software</option>
+            <option>Process Improvement</option>
+        </select>
+
+        <label for="category">Category:</label>
+        <select name="category">
+            <option>Infrastructure</option>
+            <option>Software</option>
+            <option>Other</option>
+        </select>
+
+        <label for="comments">Updated Comments:</label>
+        <textarea name="comments" rows="4"></textarea>
+
+        <button type="submit">Update Project</button>
+    </form>
+
+    <button class="back-btn" onclick="window.location.href='index.html'">⬅️ Back to Start</button>
+</body>
+</html>
