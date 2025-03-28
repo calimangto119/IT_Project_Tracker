@@ -86,6 +86,15 @@
             <option>Other</option>
         </select>
 
+        <label for="background">Background:</label>
+        <textarea name="background" rows="3"></textarea>
+
+        <label for="description">Description:</label>
+        <textarea name="description" rows="3"></textarea>
+
+        <label for="justification">Justification:</label>
+        <textarea name="justification" rows="3"></textarea>
+
         <label for="department">Department:</label>
         <input type="text" name="department">
 
@@ -100,6 +109,33 @@
 
         <label for="estimated_hours">Estimated Hours:</label>
         <input type="number" name="estimated_hours" min="0">
+
+        <label for="lead">Lead:</label>
+        <input type="text" name="lead">
+
+        <label for="it_team">IT Team:</label>
+        <input type="text" name="it_team">
+
+        <label for="other_team">Other Team:</label>
+        <input type="text" name="other_team">
+
+        <label for="rank">Rank:</label>
+        <input type="text" name="rank">
+
+        <label for="fiscal_year">Fiscal Year:</label>
+        <input type="text" name="fiscal_year">
+
+        <label for="progress">Project Progress (%):</label>
+        <input type="number" name="progress" min="0" max="100" value="0">
+
+        <label for="color">Color:</label>
+        <input type="text" name="color">
+
+        <label for="car_number">CAR Number:</label>
+        <input type="text" name="car_number">
+
+        <label for="po_number">PO Number:</label>
+        <input type="text" name="po_number">
 
         <label for="comments">Comments:</label>
         <textarea name="comments" rows="4"></textarea>
@@ -121,7 +157,7 @@
     <script>
         let milestoneCount = 0;
 
-        // Add a new milestone section
+        // Add a new milestone section dynamically
         function addMilestone() {
             milestoneCount++;
             const container = document.getElementById('milestones_container');
