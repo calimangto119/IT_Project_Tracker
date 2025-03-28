@@ -112,7 +112,8 @@
 <body>
   <div class="container">
     <h1>Update Project</h1>
-    <form action="/update_project/{{ project[0] }}" method="post">
+    <form action="https://soft-moles-doubt.loca.lt/update_project/{{ project[0] }}" method="post">
+
       <input type="hidden" name="project_id" value="{{ project[0] }}" />
 
       <label for="title">Title:</label>
