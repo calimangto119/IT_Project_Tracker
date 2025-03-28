@@ -1,188 +1,224 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Add New Project</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 40px;
-        }
-        h2 {
-            color: #0077AA;
-            text-align: center;
-        }
-        form {
-            background-color: #ffffff;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            max-width: 700px;
-            margin: auto;
-        }
-        label {
-            font-weight: bold;
-            margin-top: 10px;
-            display: block;
-        }
-        input, select, textarea, button {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
-            background-color: #0077AA;
-            color: white;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #005f8c;
-        }
-        .back-btn {
-            background-color: #ccc;
-            margin-top: 20px;
-        }
-        .milestone-section {
-            border: 1px solid #ccc;
-            padding: 15px;
-            margin-top: 10px;
-            border-radius: 4px;
-            background-color: #f9f9f9;
-        }
-        .milestone-header {
-            font-weight: bold;
-            color: #0077AA;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Project</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    /* Inline styles for a modern look */
+    body {
+      background: #f4f7f6;
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      background: #fff;
+      padding: 40px;
+      margin: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 800px;
+      width: 100%;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #333;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #555;
+    }
+    input[type="text"],
+    input[type="date"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    h2 {
+      margin-top: 30px;
+      color: #333;
+      font-size: 22px;
+    }
+    .milestone {
+      background: #f9f9f9;
+      padding: 15px;
+      margin-top: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      position: relative;
+    }
+    .remove-milestone {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: #dc3545;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+    }
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+    button, a {
+      background-color: #007BFF;
+      color: #fff;
+      padding: 12px 20px;
+      text-decoration: none;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-size: 16px;
+    }
+    button:hover, a:hover {
+      background-color: #0056b3;
+    }
+    button[type="button"] {
+      background-color: #28a745;
+    }
+    button[type="button"]:hover {
+      background-color: #218838;
+    }
+  </style>
 </head>
 <body>
-    <h2>Add New IT Project</h2>
-    <form method="POST" action="https://10.123.30.40:5000/submit_project" id="projectForm">
-        <!-- Project Information -->
-        <label for="title">Title:</label>
-        <input type="text" name="title" required>
+  <div class="container">
+    <h1>Start New Project</h1>
+    <form action="/new_project" method="post">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required />
 
-        <label for="status">Status:</label>
-        <select name="status">
-            <option value="In Process" selected>In Process</option>
-            <option value="Completed">Completed</option>
-            <option value="On Hold">On Hold</option>
-        </select>
+      <label for="status">Status:</label>
+      <input type="text" id="status" name="status" value="In Process" required />
 
-        <label for="activity_type">Activity Type:</label>
-        <select name="activity_type">
-            <option>Infrastructure</option>
-            <option>Software</option>
-            <option>Process Improvement</option>
-        </select>
+      <label for="activity_type">Activity Type:</label>
+      <input type="text" id="activity_type" name="activity_type" />
 
-        <label for="category">Category:</label>
-        <select name="category">
-            <option>Infrastructure</option>
-            <option>Software</option>
-            <option>Other</option>
-        </select>
+      <label for="category">Category:</label>
+      <input type="text" id="category" name="category" />
 
-        <label for="background">Background:</label>
-        <textarea name="background" rows="3"></textarea>
+      <label for="background">Background:</label>
+      <textarea id="background" name="background"></textarea>
 
-        <label for="description">Description:</label>
-        <textarea name="description" rows="3"></textarea>
+      <label for="description">Description:</label>
+      <textarea id="description" name="description"></textarea>
 
-        <label for="justification">Justification:</label>
-        <textarea name="justification" rows="3"></textarea>
+      <label for="justification">Justification:</label>
+      <textarea id="justification" name="justification"></textarea>
 
-        <label for="department">Department:</label>
-        <input type="text" name="department">
+      <label for="department">Department:</label>
+      <input type="text" id="department" name="department" />
 
-        <label for="owner">Project Owner:</label>
-        <input type="text" name="owner">
+      <label for="owner">Owner:</label>
+      <input type="text" id="owner" name="owner" />
 
-        <label for="start_date">Start Date:</label>
-        <input type="date" name="start_date">
+      <label for="start_date">Start Date:</label>
+      <input type="date" id="start_date" name="start_date" />
 
-        <label for="target_date">Target Date:</label>
-        <input type="date" name="target_date">
+      <label for="target_date">Target Date:</label>
+      <input type="date" id="target_date" name="target_date" />
 
-        <label for="estimated_hours">Estimated Hours:</label>
-        <input type="number" name="estimated_hours" min="0">
+      <label for="estimated_hours">Estimated Hours:</label>
+      <input type="number" id="estimated_hours" name="estimated_hours" />
 
-        <label for="lead">Lead:</label>
-        <input type="text" name="lead">
+      <label for="lead">Lead:</label>
+      <input type="text" id="lead" name="lead" />
 
-        <label for="it_team">IT Team:</label>
-        <input type="text" name="it_team">
+      <label for="it_team">IT Team:</label>
+      <input type="text" id="it_team" name="it_team" />
 
-        <label for="other_team">Other Team:</label>
-        <input type="text" name="other_team">
+      <label for="other_team">Other Team:</label>
+      <input type="text" id="other_team" name="other_team" />
 
-        <label for="rank">Rank:</label>
-        <input type="text" name="rank">
+      <label for="rank">Rank:</label>
+      <input type="text" id="rank" name="rank" />
 
-        <label for="fiscal_year">Fiscal Year:</label>
-        <input type="text" name="fiscal_year">
+      <label for="fiscal_year">Fiscal Year:</label>
+      <input type="text" id="fiscal_year" name="fiscal_year" />
 
-        <label for="progress">Project Progress (%):</label>
-        <input type="number" name="progress" min="0" max="100" value="0">
+      <label for="project_progress">Project Progress (%):</label>
+      <input type="number" id="project_progress" name="project_progress" value="0" min="0" max="100" />
 
-        <label for="color">Color:</label>
-        <input type="text" name="color">
+      <label for="color">Color:</label>
+      <input type="text" id="color" name="color" />
 
-        <label for="car_number">CAR Number:</label>
-        <input type="text" name="car_number">
+      <label for="car">CAR Number:</label>
+      <input type="text" id="car" name="car" />
 
-        <label for="po_number">PO Number:</label>
-        <input type="text" name="po_number">
+      <label for="po">PO Number:</label>
+      <input type="text" id="po" name="po" />
 
-        <label for="comments">Comments:</label>
-        <textarea name="comments" rows="4"></textarea>
+      <label for="comments">Comments:</label>
+      <textarea id="comments" name="comments"></textarea>
 
-        <!-- Milestones Section -->
-        <h3>Milestones</h3>
-        <div id="milestones_container">
-            <!-- Milestones will be added dynamically here -->
-        </div>
+      <h2>Milestones</h2>
+      <div id="milestones"></div>
 
-        <button type="button" onclick="addMilestone()">➕ Add Milestone</button>
-
-        <!-- Submit Button -->
-        <button type="submit">Submit Project</button>
+      <div class="button-group">
+        <button type="button" onclick="addMilestone()">Add Milestone</button>
+        <button type="submit">Create Project</button>
+        <a href="/">Back to Home</a>
+      </div>
     </form>
+  </div>
 
-    <button class="back-btn" onclick="window.location.href='index.html'">⬅️ Back to Start</button>
+  <script>
+    let milestoneCount = 0;
+    function addMilestone() {
+      const milestoneContainer = document.getElementById('milestones');
+      const div = document.createElement('div');
+      div.classList.add('milestone');
+      div.innerHTML = `
+        <button type="button" class="remove-milestone" onclick="removeMilestone(this)">×</button>
+        <label for="milestone_title_${milestoneCount}">Milestone Title:</label>
+        <input type="text" id="milestone_title_${milestoneCount}" name="milestone_title[]" required />
 
-    <script>
-        let milestoneCount = 0;
+        <label for="milestone_start_date_${milestoneCount}">Start Date:</label>
+        <input type="date" id="milestone_start_date_${milestoneCount}" name="milestone_start_date[]" />
 
-        // Add a new milestone section dynamically
-        function addMilestone() {
-            milestoneCount++;
-            const container = document.getElementById('milestones_container');
+        <label for="milestone_due_date_${milestoneCount}">Due Date:</label>
+        <input type="date" id="milestone_due_date_${milestoneCount}" name="milestone_due_date[]" />
 
-            const milestoneDiv = document.createElement('div');
-            milestoneDiv.className = 'milestone-section';
-            milestoneDiv.innerHTML = `
-                <div class="milestone-header">Milestone ${milestoneCount}</div>
-                <label for="milestone_title_${milestoneCount}">Milestone Title:</label>
-                <input type="text" name="milestone_title_${milestoneCount}" required>
+        <label for="milestone_progress_${milestoneCount}">Progress (%):</label>
+        <input type="number" id="milestone_progress_${milestoneCount}" name="milestone_progress[]" value="0" min="0" max="100" />
 
-                <label for="milestone_start_date_${milestoneCount}">Start Date:</label>
-                <input type="date" name="milestone_start_date_${milestoneCount}" required>
-
-                <label for="milestone_due_date_${milestoneCount}">Due Date:</label>
-                <input type="date" name="milestone_due_date_${milestoneCount}" required>
-
-                <label for="milestone_progress_${milestoneCount}">Progress (%):</label>
-                <input type="number" name="milestone_progress_${milestoneCount}" min="0" max="100" value="0">
-
-                <label for="milestone_comments_${milestoneCount}">Comments:</label>
-                <textarea name="milestone_comments_${milestoneCount}" rows="3"></textarea>
-            `;
-            container.appendChild(milestoneDiv);
-        }
-    </script>
+        <label for="milestone_comments_${milestoneCount}">Comments:</label>
+        <textarea id="milestone_comments_${milestoneCount}" name="milestone_comments[]"></textarea>
+      `;
+      milestoneContainer.appendChild(div);
+      milestoneCount++;
+    }
+    function removeMilestone(button) {
+      button.parentNode.remove();
+    }
+  </script>
 </body>
 </html>
