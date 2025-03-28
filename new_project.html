@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 40px;
+        }
+        h2 {
+            color: #0077AA;
+        }
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-width: 600px;
+            margin: auto;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        input, select, textarea, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #0077AA;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005f8c;
+        }
+        .back-btn {
+            background-color: #ccc;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Add New Project</h2>
+    <form method="POST" action="https://10.123.30.40:5000/submit_project">
+        <label for="title">Title:</label>
+        <input type="text" name="title" required>
+
+        <label for="category">Category:</label>
+        <select name="category">
+            <option>Infrastructure</option>
+            <option>Software</option>
+            <option>Other</option>
+        </select>
+
+        <label for="department">Department:</label>
+        <input type="text" name="department">
+
+        <label for="start_date">Start Date:</label>
+        <input type="date" name="start_date">
+
+        <label for="target_date">Target Date:</label>
+        <input type="date" name="target_date">
+
+        <label for="comments">Comments:</label>
+        <textarea name="comments" rows="4"></textarea>
+
+        <button type="submit">Submit Project</button>
+    </form>
+
+    <button class="back-btn" onclick="window.location.href='index.html'">⬅️ Back to Start</button>
+</body>
+</html>
