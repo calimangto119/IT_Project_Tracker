@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Update Project</title>
+    <title>Update Existing Project</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,44 +45,157 @@
             background-color: #ccc;
             margin-top: 20px;
         }
+        .milestone-section {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .milestone-header {
+            font-weight: bold;
+            color: #0077AA;
+        }
     </style>
 </head>
 <body>
-    <h2>Update Existing Project</h2>
-    <form method="POST" action="https://10.123.30.40:5000/update_project">
-        <label for="project_id">Project ID:</label>
-        <input type="number" name="project_id" required>
-
-        <label for="title">Updated Title:</label>
-        <input type="text" name="title">
-
-        <label for="status">Status:</label>
-        <select name="status">
-            <option value="In Process">In Process</option>
-            <option value="Completed">Completed</option>
-            <option value="On Hold">On Hold</option>
+    <h2>Update Existing IT Project</h2>
+    <form method="POST" action="https://10.123.30.40:5000/update_project" id="updateProjectForm">
+        <!-- Project Selection -->
+        <label for="project_id">Select Project:</label>
+        <select id="project_id" name="project_id" required>
+            <option value="">Select a project</option>
+            <!-- Dynamically populated via JavaScript -->
         </select>
 
-        <label for="activity_type">Activity Type:</label>
-        <select name="activity_type">
-            <option>Infrastructure</option>
-            <option>Software</option>
-            <option>Process Improvement</option>
-        </select>
+        <button type="button" onclick="loadProject()">📥 Load Project</button>
 
-        <label for="category">Category:</label>
-        <select name="category">
-            <option>Infrastructure</option>
-            <option>Software</option>
-            <option>Other</option>
-        </select>
+        <!-- Project Info Fields (Loaded after selecting) -->
+        <div id="project_fields" style="display:none;">
+            <label for="title">Title:</label>
+            <input type="text" name="title" id="title">
 
-        <label for="comments">Updated Comments:</label>
-        <textarea name="comments" rows="4"></textarea>
+            <label for="status">Status:</label>
+            <select name="status" id="status">
+                <option value="In Process" selected>In Process</option>
+                <option value="Completed">Completed</option>
+                <option value="On Hold">On Hold</option>
+            </select>
 
-        <button type="submit">Update Project</button>
+            <label for="activity_type">Activity Type:</label>
+            <select name="activity_type" id="activity_type">
+                <option>Infrastructure</option>
+                <option>Software</option>
+                <option>Process Improvement</option>
+            </select>
+
+            <label for="category">Category:</label>
+            <select name="category" id="category">
+                <option>Infrastructure</option>
+                <option>Software</option>
+                <option>Other</option>
+            </select>
+
+            <label for="department">Department:</label>
+            <input type="text" name="department" id="department">
+
+            <label for="start_date">Start Date:</label>
+            <input type="date" name="start_date" id="start_date">
+
+            <label for="target_date">Target Date:</label>
+            <input type="date" name="target_date" id="target_date">
+
+            <label for="comments">Comments:</label>
+            <textarea name="comments" rows="4" id="comments"></textarea>
+
+            <!-- Milestones Section -->
+            <h3>Milestones</h3>
+            <div id="milestones_container">
+                <!-- Milestones dynamically loaded -->
+            </div>
+
+            <button type="submit">💾 Update Project</button>
+        </div>
     </form>
 
     <button class="back-btn" onclick="window.location.href='index.html'">⬅️ Back to Start</button>
+
+    <script>
+        let milestoneCount = 0;
+
+        // Fetch project list and populate dropdown
+        async function fetchProjects() {
+            const response = await fetch('https://10.123.30.40:5000/get_projects');
+            const data = await response.json();
+
+            const projectDropdown = document.getElementById('project_id');
+            data.projects.forEach(project => {
+                const option = document.createElement('option');
+                option.value = project.id;
+                option.textContent = `${project.id}: ${project.title}`;
+                projectDropdown.appendChild(option);
+            });
+        }
+
+        // Load project details dynamically into fields
+        async function loadProject() {
+            const projectId = document.getElementById('project_id').value;
+            if (!projectId) {
+                alert("Please select a project to load.");
+                return;
+            }
+
+            const response = await fetch(`https://10.123.30.40:5000/get_project_details/${projectId}`);
+            const data = await response.json();
+
+            if (data.success) {
+                document.getElementById('project_fields').style.display = 'block';
+                document.getElementById('title').value = data.project.title || '';
+                document.getElementById('status').value = data.project.status || 'In Process';
+                document.getElementById('activity_type').value = data.project.activity_type || 'Infrastructure';
+                document.getElementById('category').value = data.project.category || 'Infrastructure';
+                document.getElementById('department').value = data.project.department || '';
+                document.getElementById('start_date').value = data.project.start_date || '';
+                document.getElementById('target_date').value = data.project.target_date || '';
+                document.getElementById('comments').value = data.project.comments || '';
+
+                loadMilestones(data.milestones);
+            } else {
+                alert("Failed to load project. Please try again.");
+            }
+        }
+
+        // Load milestone data dynamically
+        function loadMilestones(milestones) {
+            const container = document.getElementById('milestones_container');
+            container.innerHTML = ''; // Clear previous milestones
+            milestones.forEach((milestone, index) => {
+                milestoneCount++;
+                const milestoneDiv = document.createElement('div');
+                milestoneDiv.className = 'milestone-section';
+                milestoneDiv.innerHTML = `
+                    <div class="milestone-header">Milestone ${index + 1}</div>
+                    <label for="milestone_title_${index + 1}">Milestone Title:</label>
+                    <input type="text" name="milestone_title_${index + 1}" value="${milestone.title || ''}" required>
+
+                    <label for="milestone_start_date_${index + 1}">Start Date:</label>
+                    <input type="date" name="milestone_start_date_${index + 1}" value="${milestone.start_date || ''}" required>
+
+                    <label for="milestone_due_date_${index + 1}">Due Date:</label>
+                    <input type="date" name="milestone_due_date_${index + 1}" value="${milestone.due_date || ''}" required>
+
+                    <label for="milestone_progress_${index + 1}">Progress (%):</label>
+                    <input type="number" name="milestone_progress_${index + 1}" value="${milestone.progress || 0}" min="0" max="100">
+
+                    <label for="milestone_comments_${index + 1}">Comments:</label>
+                    <textarea name="milestone_comments_${index + 1}" rows="3">${milestone.comments || ''}</textarea>
+                `;
+                container.appendChild(milestoneDiv);
+            });
+        }
+
+        // Initial load of projects on page load
+        window.onload = fetchProjects;
+    </script>
 </body>
 </html>
